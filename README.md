@@ -1,10 +1,10 @@
-M-Shop
+## M-Shop
 
 ![Screenshot (33)](https://github.com/user-attachments/assets/ba51e25e-5ab4-405a-90b6-484bc400e899)
 
-🛍️ E-commerce App
+🛍️ M-Shop App
 
-Welcome to the E-commerce App, a robust and scalable web application built with Flask, designed to provide a seamless online shopping experience. This app offers a wide range of features to manage products, process payments, and handle user interactions efficiently.
+Welcome to the M-Shop App, a robust and scalable web application built with Flask, designed to provide a seamless online shopping experience. This app offers a wide range of features to manage products, process payments, and handle user interactions efficiently.
 
 Features
 
