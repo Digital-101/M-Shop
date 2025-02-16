@@ -1,10 +1,6 @@
-write me github description for ecommerce app using flask
+M-Shop
 
 ![Screenshot (33)](https://github.com/user-attachments/assets/ba51e25e-5ab4-405a-90b6-484bc400e899)
-
-
-Here's a suggested GitHub description for your eCommerce app using Flask:
-
 
 🛍️ E-commerce App
 
@@ -23,16 +19,16 @@ Technologies Used
 
 - Backend: Flask
 - Frontend: HTML, CSS, JavaScript
-- Database: SQLite (or any preferred database)
-- Payment Gateway: Stripe/PayPal integration
+- Database: SQLite 
+- Payment Gateway: PayPal integration
 - Deployment: Docker for containerization
 
 Installation
 
 1. Clone the repository:
 
-git clone https://github.com/yourusername/ecommerce-app.git
-cd ecommerce-app
+git clone https://github.com/Digital-101/M-Shop.git
+cd M-Shop
 
 
 2. Set up a virtual environment:
@@ -57,9 +53,3 @@ Contributing
 
 Contributions are welcome! Please read the contributing guidelines before getting started.
 
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-
-Feel free to modify this description to better fit your specific application's features and setup.
