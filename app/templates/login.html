@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Login</h1>
+    <form method="POST" action="{{ url_for('login') }}">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.email.label }} {{ form.email() }}
+        </div>
+        <div>
+            {{ form.password.label }} {{ form.password() }}
+        </div>
+        <div>
+            {{ form.remember() }} {{ form.remember.label }}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+    
+    Dont have account? <a href="{{ url_for('register') }}">Register</a>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Product</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+        <!-- Manager Navigation Bar -->
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('manager_dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('view_products') }}">Manage Products</a></li>
+                <li><a href="{{ url_for('view_users') }}">View Users</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+
+    <h1>Add New Product</h1>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label }}<br>
+            {{ form.name() }}
+        </div>
+        <div>
+            {{ form.price.label }}<br>
+            {{ form.price() }}
+        </div>
+        <div>
+            {{ form.description.label }}<br>
+            {{ form.description() }}
+        </div>
+        <div>
+            {{ form.image.label }}<br>
+            {{ form.image() }}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+    <a href="{{ url_for('view_products') }}">Back to Products</a>
+</body>
+</html>

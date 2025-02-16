@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Welcome to the M-Shop!</h1>
+    <marquee behavior="scroll" direction="down">
+        <h3 style="background-color: aquamarine;">Your First Shop to get your dream Mobile Device</h3>
+    </marquee>
+    <img src="{{url_for('static', filename='images.jpg') }}" alt="" width="100px" height="90px">
+    <marquee behavior="scroll" direction="up" width="100%">
+        <h3 style="background-color: burlywood;">Level Up now</h3>
+    </marquee>
+    <p>You are logged in.</p>
+{% endblock %}

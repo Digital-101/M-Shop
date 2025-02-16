@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Your CSS file -->
+</head>
+<body>
+
+    <!-- Admin Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('manager_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('view_products') }}">Manage Products</a></li>
+            <li><a href="{{ url_for('view_users') }}">View Users</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Admin Content -->
+    <div class="container">
+        <h1>Manager Dashboard</h1>
+
+        <!-- Overview or welcome message for manager -->
+        <p>Welcome, {{ current_user.username }}! You have administrative access.</p>
+
+        <!-- Actions the manager can take -->
+        <div class="admin-actions">
+            <h2>Actions</h2>
+
+            <!-- Example: Add Product -->
+            <div class="action-card">
+                <h3>Manage Products</h3>
+                <p>Add, update, or delete products in the store.</p>
+                <a href="{{ url_for('add_product') }}" class="btn">Add New Product</a>
+                <a href="{{ url_for('view_products') }}" class="btn">View Products</a>
+            </div>
+
+            <!-- Example: View Users -->
+            <div class="action-card">
+                <h3>View Users</h3>
+                <p>See all registered users, their roles, and manage their permissions.</p>
+                <a href="{{ url_for('view_users') }}" class="btn">View Users</a>
+            </div>
+
+            <!-- Example: Other Admin Features -->
+            <div class="action-card">
+                <h3>Other Features</h3>
+                <p>Additional administrative actions can be added here.</p>
+                <a href="#" class="btn">Manage Orders</a>
+                <a href="#" class="btn">Analytics</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

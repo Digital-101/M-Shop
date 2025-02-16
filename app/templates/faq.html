@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+{% block title %}FAQ - Flask App{% endblock %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #f9f9f9;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+    }
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .faq-item {
+        border-bottom: 1px solid #ddd;
+        padding: 15px 0;
+    }
+    .question {
+        font-weight: bold;
+        cursor: pointer;
+        color: blue;
+    }
+    .answer {
+        display: none;
+        margin-top: 5px;
+    }
+</style>
+    <h1>Frequently Asked Questions</h1>
+    <div class="faq-container">
+        {% for faq in faqs %}
+            <div class="faq-item">
+                <div class="question" onclick="toggleAnswer(this)">
+                    {{ faq.question }}
+                </div>
+                <div class="answer">{{ faq.answer }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+{% endblock %}

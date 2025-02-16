@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}M-Shop{% endblock %}</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='appstyle.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+</head>
+<body>
+ 
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{ url_for('home') }}">M-Shop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('view_products') }}">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('faq') }}">FAQ</a>
+              </li>
+              <!-- Add more nav items as needed -->
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <!-- Cart Icon with Dynamic Count -->
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('view_cart') }}">
+                  <i class="fas fa-shopping-cart"></i> Cart 
+                  <span class="badge bg-primary">{{ (cart_count) }}</span>
+                </a>
+              </li>
+              <nav>
+        
+            </nav>
+            
+              <!-- User-related items (e.g., login/logout) -->
+              {% if current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer style="background-color: #f8f8f8; padding: 40px 0; border-top: 1px solid #e0e0e0;">
+      <div style="max-width: 1200px; margin: auto; display: flex; justify-content: space-between; flex-wrap: wrap;">
+    
+        <!-- Company Info -->
+        <div style="flex: 1; min-width: 250px; padding: 20px;">
+          <h4 style="margin-bottom: 20px;">About Us</h4>
+          <p>Our e-commerce platform offers a wide variety of products with secure shopping, fast shipping, and excellent customer service.</p>
+        </div>
+    
+        <!-- Customer Service Links -->
+        <div style="flex: 1; min-width: 250px; padding: 20px;">
+          <h4 style="margin-bottom: 20px;">Customer Service</h4>
+          <ul style="list-style: circle; padding: 0;">
+            <li><a href="/help" style="color: #333; text-decoration: none;">Help Center</a></li>
+            <li><a href="/shipping" style="color: #333; text-decoration: none;">Shipping & Delivery</a></li>
+            <li><a href="/returns" style="color: #333; text-decoration: none;">Returns & Exchanges</a></li>
+            <li><a href="{{ url_for('faq') }}" style="color: #333; text-decoration: none;">FAQ</a></li>
+            <li><a href="/contact" style="color: #333; text-decoration: none;">Contact Us</a></li>
+          </ul>
+        </div>
+    
+        <!-- Social Media Links -->
+        <div style="flex: 1; min-width: 250px; padding: 20px;">
+          <h4 style="margin-bottom: 20px;">Follow Us</h4>
+          <div>
+            <a href="https://facebook.com" style="margin-right: 15px;"><img src="{{ url_for('static', filename='images/brands/facebook.png') }}" alt="Facebook" style="width: 24px;"></a>
+            <a href="https://twitter.com" style="margin-right: 15px;"><img src="{{ url_for('static', filename='images/brands/twitter.png') }}" alt="Twitter" style="width: 24px;"></a>
+            <a href="https://instagram.com" style="margin-right: 15px;"><img src="{{ url_for('static', filename='images/brands/Instagram.png') }}" alt="Instagram" style="width: 24px;"></a>
+            <a href="https://linkedin.com"><img src="{{ url_for('static', filename='images/brands/LinkedIn.png') }}" alt="LinkedIn" style="width: 24px;"></a>
+          </div>
+        </div>
+    
+        <!-- Payment Methods -->
+        <div style="flex: 1; min-width: 250px; padding: 20px;">
+          <h4 style="margin-bottom: 20px;">We Accept</h4>
+          <img src="{{ url_for('static', filename='images/brands/visa.jpg') }}" alt="Visa" style="width: 50px; margin-right: 10px;">
+          <img src="{{ url_for('static', filename='images/brands/mastercard.png') }}" alt="Mastercard" style="width: 50px; margin-right: 10px;">
+          <img src="{{ url_for('static', filename='images/brands/paypal.jpg') }}" alt="PayPal" style="width: 50px;">
+        </div>
+    
+      </div>
+    
+      <!-- Bottom Footer -->
+      <div style="background-color: #e0e0e0; text-align: center; padding: 20px;">
+        <p style="margin: 0;">&copy; 2025 Your E-Commerce Site. All Rights Reserved.</p>
+      </div>
+    </footer>
+    
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cartBtns = document.querySelectorAll('.add-to-cart-btn');
+        cartBtns.forEach(function(btn) {
+            btn.addEventListener('click', function(event) {
+                event.preventDefault();  // Prevent default link behavior
+                const productId = this.getAttribute('data-product-id');
+                
+                // Send POST request using Fetch API
+                fetch(`/add_to_cart/${productId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update cart count in the navbar
+                    document.querySelector('.badge').innerText = data.cart_count;
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+    </script>
+</html>

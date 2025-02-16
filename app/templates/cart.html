@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Your Cart</h1>
+    <div class="cart-container">
+        <!-- Cart Items Section -->
+        <div class="cart-items">
+            {% for product_id, item in cart.items() %}
+            <div class="cart-item">
+                <img src="{{ url_for('static', filename='images/'+ item.image_file) }}" alt="{{ item.name }}" width="300px" height="300px">
+                <div>
+                    <h5>{{ item.name }}</h5>
+                    <p>Price: R{{ item.price }}</p>
+                    <form action="{{ url_for('update_cart', product_id=product_id) }}" method="POST">
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" placeholder="update quantity">
+                        <button type="submit" class="btn btn-secondary">Update</button>
+                    </form>
+                </div>
+                <form action="{{ url_for('remove_from_cart', product_id=product_id) }}" method="GET">
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Totals and Delivery Price Section -->
+        <div class="cart-totals">
+            <h3>Cart Totals</h3>
+            <p>Subtotal: R{{ subtotal }}</p>
+            <p>Delivery Price: R{{ delivery_price }}</p>
+            <h4>Total: R{{ total }}</h4>
+            <a href="{{ url_for('checkout') }}" class="btn btn-primary">Checkout</a>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+{% endblock %}
